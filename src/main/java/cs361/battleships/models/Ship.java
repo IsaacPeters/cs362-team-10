@@ -15,7 +15,7 @@ public class Ship {
 	@JsonProperty private String kind;
 	@JsonProperty private List<Square> occupiedSquares;
 	@JsonProperty private int size;
-	@JsonProperty private Square CaptainModule;
+	@JsonProperty private SquareCommand CaptainModule;
 
 	public Ship() {
 		occupiedSquares = new ArrayList<>();
@@ -65,15 +65,15 @@ public class Ship {
 		for (int i=0; i<size; i++) {
 			if (isVertical) {
 				if(i == CommandLocation){
-					CaptainModule = new Square(row + i, col, ArmourPoints);
-					occupiedSquares.add(CaptainModule);
+					CaptainModule = new SquareCommand(row + i, col, ArmourPoints);
+					occupiedSquares.add(new Square(row + i, col));
 				} else {
 					occupiedSquares.add(new Square(row + i, col));
 				}
 			} else {
 				if(i == CommandLocation){
-					CaptainModule = new Square(row, (char) (col + i), ArmourPoints);
-					occupiedSquares.add(CaptainModule);
+					CaptainModule = new SquareCommand(row, (char) (col + i), ArmourPoints);
+					occupiedSquares.add(new Square(row, (char) (col + i)));
 				} else {
 					occupiedSquares.add(new Square(row, (char) (col + i)));
 				}
@@ -106,8 +106,6 @@ public class Ship {
 		if(attackedSquare.getColumn() == CaptainModule.getColumn() && attackedSquare.getRow() == CaptainModule.getRow()){
 			attackedSquare = CaptainModule;
 		}
-		
-		/* Commented out to allow multiple hits in the same location*/
 //		if (attackedSquare.isHit()) {
 //			var result = new Result(attackedLocation);
 //			result.setResult(AtackStatus.INVALID);
@@ -165,4 +163,7 @@ public class Ship {
 	public String toString() {
 		return kind + occupiedSquares.toString();
 	}
+
+	@JsonIgnore
+	public SquareCommand getCaptainModule() {return CaptainModule; }
 }

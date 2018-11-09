@@ -10,23 +10,12 @@ public class Square {
 	@JsonProperty private char column;
 	@JsonProperty private boolean hit = false;
 
-	@JsonProperty private int numHits = 0;
-	@JsonProperty private int armorPoints;
-
 	public Square() {
 	}
 
 	public Square(int row, char column) {
 		this.row = row;
 		this.column = column;
-		armorPoints = 0;
-	}
-
-	//squareCommand
-	public Square(int x, char y, int Armour){
-		column = y;
-		row = x;
-		armorPoints = Armour;
 	}
 
 	@Override
@@ -51,14 +40,7 @@ public class Square {
 		return hit;
 	}
 
-	public void hit() {
-		if(numHits < armorPoints) {
-			numHits += 1;
-		}
-		if(numHits == armorPoints){
-			this.setHit(true);
-		}
-	}
+	public void hit() { hit = true; }
 
 	@Override
 	public String toString() {
