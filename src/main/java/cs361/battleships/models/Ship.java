@@ -11,14 +11,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+@JsonTypeInfo(use=JsonTypeInfo.Id.CLASS, property="@class")
 
 public class Ship {
-	@JsonTypeInfo(use=JsonTypeInfo.Id.CLASS, property="@class")
+
 
 	@JsonProperty private String kind;
 	@JsonProperty private List<Square> occupiedSquares;
 	@JsonProperty private int size;
-//	@JsonProperty private SquareCommand CaptainModule;
+
 
 	public Ship() {
 		occupiedSquares = new ArrayList<>();
@@ -45,19 +46,6 @@ public class Ship {
 	}
 
 	public void place(char col, int row, boolean isVertical) {
-		int size = 0;
-		switch(kind) {
-			case "MINESWEEPER":
-				size = 2;
-				break;
-			case "DESTROYER":
-				size = 3;
-				break;
-			case "BATTLESHIP":
-				size = 4;
-				break;
-		}
-
 		for (int i=0; i< size; i++) {
 			if (isVertical) {
 				occupiedSquares.add(new Square(row+i, col));
@@ -89,9 +77,6 @@ public class Ship {
 			return new Result(attackedLocation);
 		}
 		var attackedSquare = square.get();
-//		if(attackedSquare.getColumn() == CaptainModule.getColumn() && attackedSquare.getRow() == CaptainModule.getRow()){
-//			attackedSquare = CaptainModule;
-//		}
 
 		if (attackedSquare.isHit()) {
 			var result = new Result(attackedLocation);
@@ -125,7 +110,6 @@ public class Ship {
 			return true;
 		}
 		return false;
-		//return getOccupiedSquares().stream().allMatch(s -> s.isHit());
 	}
 
 
@@ -151,14 +135,6 @@ public class Ship {
 		return kind + occupiedSquares.toString();
 	}
 
-//	@JsonIgnore
-//	public SquareCommand getCaptainModule() {return CaptainModule; }
-//
-//	@JsonIgnore
-//	protected void setCaptainModule(SquareCommand in){
-//		CaptainModule = in;
-//	}
-
 	@JsonIgnore
 	public void setKind(String kindToset){
 		kind = kindToset;
@@ -171,4 +147,9 @@ public class Ship {
 	protected void setSize(int sizeToset){
 		size = sizeToset;
 	}
+	@JsonIgnore
+	protected int getSize(){
+		return size;
+	}
+
 }

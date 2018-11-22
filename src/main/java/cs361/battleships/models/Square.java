@@ -3,10 +3,10 @@ package cs361.battleships.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-
+@JsonTypeInfo(use=JsonTypeInfo.Id.CLASS, property="@class")
 @SuppressWarnings("unused")
 public class Square {
-	@JsonTypeInfo(use=JsonTypeInfo.Id.CLASS, property="@Square")
+
 	@JsonProperty private int row;
 	@JsonProperty private char column;
 	@JsonProperty private boolean hit = false;
