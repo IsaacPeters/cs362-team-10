@@ -2,6 +2,8 @@ package cs361.battleships.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import freemarker.core.ReturnInstruction.Return;
 
 import java.util.ArrayList;
@@ -34,7 +36,19 @@ public class Board {
 		if (ships.stream().anyMatch(s -> s.getKind().equals(ship.getKind()))) {
 			return false;
 		}
-		final var placedShip = new Ship(ship.getKind());
+
+		var placedShipT = new Ship();
+		switch (ship.getKind()){
+			case "MINESWEEPER": placedShipT = new Ship_Minesweeper();
+				break;
+			case "DESTROYER": placedShipT = new Ship_Destroyer();
+				break;
+			case "BATTLESHIP": placedShipT = new Ship_Battleship();
+				break;
+		}
+
+		final var placedShip = placedShipT;
+		//final var placedShip = new Ship(ship.getKind());
 		placedShip.place(y, x, isVertical);
 		if (ships.stream().anyMatch(s -> s.overlaps(placedShip))) {
 			return false;

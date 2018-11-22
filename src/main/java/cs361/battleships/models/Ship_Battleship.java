@@ -1,0 +1,100 @@
+package cs361.battleships.models;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.google.common.collect.Sets;
+import com.mchange.v1.util.CollectionUtils;
+import jdk.jshell.Snippet;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+public class Ship_Battleship extends Ship {
+
+    @JsonProperty private SquareCommand CaptainModule;
+
+    public Ship_Battleship() {
+        this.setOccupiedSquares(new ArrayList<>());
+        this.setKind("BATTLESHIP");
+        this.setSize(4);
+    }
+
+    public void place(char col, int row, boolean isVertical) {
+        List<Square> temp = getOccupiedSquares();
+        for (int i=0; i < 4; i++) {
+            if (isVertical) {
+                if(i == 2){
+                    SquareCommand toPass = new SquareCommand(row + i, col, 2);
+                    setCaptainModule(toPass);
+                    temp.add(new Square(row + i, col));
+                } else {
+                    temp.add(new Square(row + i, col));
+                }
+            } else {
+                if(i == 2){
+                    SquareCommand toPass = new SquareCommand(row, (char) (col + i), 2);
+                    setCaptainModule(toPass);
+                    temp.add(new Square(row, (char) (col + i)));
+                } else {
+                    temp.add(new Square(row, (char) (col + i)));
+                }
+            }
+        }
+        this.setOccupiedSquares(temp);
+    }
+
+    public Result attack(int x, char y) {
+        var attackedLocation = new Square(x, y);
+        var square = getOccupiedSquares().stream().filter(s -> s.equals(attackedLocation)).findFirst();
+        if (!square.isPresent()) {
+            return new Result(attackedLocation);
+        }
+        var attackedSquare = square.get();
+        if(attackedSquare.getColumn() == CaptainModule.getColumn() && attackedSquare.getRow() == CaptainModule.getRow()){
+            attackedSquare = CaptainModule;
+        }
+
+//		if (attackedSquare.isHit()) {
+//			var result = new Result(attackedLocation);
+//			result.setResult(AtackStatus.INVALID);
+//			return result;
+//		}
+
+        attackedSquare.hit();
+        var result = new Result(attackedLocation);
+        result.setShip(this);
+        if (isSunk()) {
+            result.setResult(AtackStatus.SUNK);
+        } else if (attackedSquare.getHit() == false) {
+            result.setResult(AtackStatus.MISS);
+        } else {
+            result.setResult(AtackStatus.HIT);
+        }
+        return result;
+    }
+
+    @JsonIgnore
+    public boolean isSunk() {
+        int hit_check = 0;
+        for (int i = 0; i < 4; i++) {
+            if(this.getOccupiedSquares().get(i).getHit()){
+                hit_check += 1;
+            }
+        }
+        if(hit_check == 4 || CaptainModule.getHit()){
+            return true;
+        }
+        return false;
+        //return getOccupiedSquares().stream().allMatch(s -> s.isHit());
+    }
+
+    @JsonIgnore
+    public SquareCommand getCaptainModule() {return CaptainModule; }
+
+    @JsonIgnore
+    protected void setCaptainModule(SquareCommand in){
+        CaptainModule = in;
+    }
+}
