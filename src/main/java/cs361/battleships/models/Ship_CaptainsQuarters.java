@@ -49,6 +49,7 @@ public class Ship_CaptainsQuarters extends Ship{
             return new Result(attackedLocation);
         }
         var attackedSquare = square.get();
+
         if(attackedSquare.getColumn() == CaptainModule.getColumn() && attackedSquare.getRow() == CaptainModule.getRow()){
             attackedSquare = CaptainModule;
         }

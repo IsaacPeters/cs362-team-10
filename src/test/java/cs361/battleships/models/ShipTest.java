@@ -147,7 +147,7 @@ public class ShipTest {
 
     @Test
     public void testAttackSameSquareTwice() {
-        Ship minesweeper = new Ship("MINESWEEPER");
+        Ship minesweeper = new Ship_Minesweeper();
         minesweeper.place('A', 1, true);
         var result = minesweeper.attack(1, 'A');
         assertEquals(AtackStatus.SUNK, result.getResult());
@@ -167,9 +167,9 @@ public class ShipTest {
 
     @Test
     public void testSinkCommand() {
-        Ship Minesweeper = new Ship ("MINESWEEPER");
-        Ship Destroyer = new Ship("DESTROYER");
-        Ship BattleShip = new Ship("BATTLESHIP");
+        Ship Minesweeper = new Ship_Minesweeper ();
+        Ship Destroyer = new Ship_Destroyer();
+        Ship BattleShip = new Ship_Battleship();
 
         Minesweeper.place('A',1, true);
         Destroyer.place('B',1, true);
