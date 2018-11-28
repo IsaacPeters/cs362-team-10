@@ -67,7 +67,14 @@ public class Board {
 			return attackResult;
 		}
 		var hitShip = shipsAtLocation.get(0);
-		var attackResult = hitShip.attack(s.getRow(), s.getColumn());
+
+		// Check to see if we've sunk a ship. If we have, we should use the space laser instead
+		Result attackResult;
+		if (ships.stream().anyMatch(ship -> ship.isSunk())) {
+			attackResult = hitShip.spaceLaser(s.getRow(), s.getColumn());
+		} else {
+			attackResult = hitShip.attack(s.getRow(), s.getColumn());
+		}
 		if (attackResult.getResult() == AtackStatus.SUNK) {
 			if (ships.stream().allMatch(ship -> ship.isSunk())) {
 				attackResult.setResult(AtackStatus.SURRENDER);
