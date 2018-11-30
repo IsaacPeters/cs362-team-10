@@ -70,7 +70,22 @@ public class Ship {
 		return kind;
 	}
 
+	public Result spaceLaser(int x, char y) {
+		return this.attack(x, y, true);
+	}
+
 	public Result attack(int x, char y) {
+		return this.attack(x, y, false);
+	}
+
+	private Result attack(int x, char y, boolean penetration) {
+		// TODO - refactor to use property of ship, not just the kind
+		// This tests to see if we need penetration to hit this ship.
+		// If we do, and penetration is false, then we should return a miss
+		if (this.kind == "SUBMARINE" && !penetration) {
+			return new Result(new Square(x, y));
+		}
+
 		var attackedLocation = new Square(x, y);
 		var square = getOccupiedSquares().stream().filter(s -> s.equals(attackedLocation)).findFirst();
 		if (!square.isPresent()) {

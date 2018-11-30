@@ -134,4 +134,23 @@ public class BoardTest {
         result = board.attack(3,'C');
         assertEquals(result.getResult(), AtackStatus.SURRENDER);
     }
+
+    @Test
+    public void testSpaceLaser() {
+        board.placeShip(new Ship("MINESWEEPER"), 1, 'A', true);
+        board.placeShip(new Ship("BATTLESHIP"), 1, 'C', true);
+        board.placeShip(new Ship("DESTROYER"), 1, 'B', true);
+        board.placeShip(new Ship("SUBMARINE"), 5, 'F', true);
+
+        var result = board.attack(5, 'F');
+        assertEquals(result.getResult(), AtackStatus.MISS);
+
+        board.attack(1, 'C');
+        board.attack(2, 'C');
+        result = board.attack(3, 'C');
+        assertEquals(result.getResult(), AtackStatus.SUNK);
+
+        result = board.attack(4, 'F');
+        assertEquals(result.getResult(), AtackStatus.HIT);
+    }
 }
