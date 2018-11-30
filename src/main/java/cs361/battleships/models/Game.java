@@ -60,20 +60,27 @@ public class Game {
 
         return true;
     }
-    //Move ship
-    public boolean moveShip(Ship ship, String direction){
+    //Move ship in the direction that the user wants
+    public boolean moveShip(Ship ship, String direction, boolean isVertical){
+        int directionChoice;
             switch(direction){
                 case "NORTH":
+                    directionChoice = -1;
                     break;
                 case "SOUTH":
-
+                    directionChoice = 1;
                     break;
                 case "WEST":
-
+                    directionChoice = -1;
                     break;
                 case "EAST":
+                    directionChoice = 1;
+                    break;
             }
+           boolean successful = playersBoard.moveShip(ship,directionChoice,isVertical);
 
+            if (!successful)
+            return false;
     }
 
     private char randCol() {
