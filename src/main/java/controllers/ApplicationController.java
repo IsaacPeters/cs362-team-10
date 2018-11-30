@@ -36,7 +36,7 @@ public class ApplicationController {
     public Result moveShipController(Context context, PlacementGameAction g, String direction) {
         Game game = g.getGame();
         Ship ship = new Ship(g.getShipType());
-        boolean result = game.moveShip(ship,direction);
+        boolean result = game.moveShipG(ship,direction,g.isVertical());
         if (result) {
             return Results.json().render(game);
         } else {

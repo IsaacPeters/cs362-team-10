@@ -68,20 +68,6 @@ public class Ship_CaptainsQuarters extends Ship{
         return result;
     }
 
-    public boolean moveShip(int Direction, boolean isVerticalMove){
-        List<Square> temp = getOccupiedSquares();
-
-        for (int i = 0; i < temp.size(); i++) {
-            Square tempSquare = this.getOccupiedSquares().get(i);
-            if (isVerticalMove) {
-                temp.get(i).setRow(tempSquare.getRow() + Direction);
-            } else {
-                temp.get(i).setColumn((char) (tempSquare.getColumn() + Direction));
-            }
-        }
-    }
-
-
     @JsonIgnore
     public boolean isSunk() {
         int hit_check = 0;

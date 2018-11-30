@@ -94,7 +94,9 @@ public class Board {
 		}
 		return attackResult;
 	}
-	public Result moveShip(Ship ship,int direction, boolean isVertical){}
+	public Result moveShip(Ship ship,int direction, boolean isVertical){
+
+	}
 
 	public List<Result> sonarPulse(int x, char y) {
 		List<Result> pulseResults = new ArrayList<>();
