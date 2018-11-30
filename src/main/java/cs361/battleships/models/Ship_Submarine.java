@@ -17,7 +17,7 @@ public class Ship_Submarine extends Ship_CaptainsQuarters {
     public Ship_Submarine() {
         this.setOccupiedSquares(new ArrayList<>());
         this.setKind("SUBMARINE");
-        this.setSize(5);
+        this.setSize(4);
     }
 
     public Ship_Submarine(boolean Submerge) {
@@ -27,7 +27,7 @@ public class Ship_Submarine extends Ship_CaptainsQuarters {
         } else {
             this.setKind("SUBMARINE");
         }
-        this.setSize(5);
+        this.setSize(4);
         this.setIsSubmerged(Submerge);
     }
 
