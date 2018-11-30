@@ -112,7 +112,6 @@ public class Ship {
 		return result;
 	}
 
-
 	@JsonIgnore
 	public boolean isSunk() {
 		int hit_check = 0;

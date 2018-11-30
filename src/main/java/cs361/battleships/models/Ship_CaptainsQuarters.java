@@ -43,7 +43,15 @@ public class Ship_CaptainsQuarters extends Ship{
         this.setOccupiedSquares(temp);
     }
 
-    public Result attack(int x, char y) {
+    public Result spaceLaser(int x, char y) {
+		return this.attack(x, y, true);
+	}
+
+	public Result attack(int x, char y) {
+		return this.attack(x, y, false);
+	}
+
+	private Result attack(int x, char y, boolean penetration) {
         var attackedLocation = new Square(x, y);
         var square = getOccupiedSquares().stream().filter(s -> s.equals(attackedLocation)).findFirst();
         if (!square.isPresent()) {
