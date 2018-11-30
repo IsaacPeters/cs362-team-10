@@ -61,7 +61,7 @@ public class Game {
         return true;
     }
     //Move ship in the direction that the user wants
-    public boolean moveShipG(Ship ship,String direction, boolean isVertical){
+    public boolean moveShipG(String direction, boolean isVertical, String shipType){
         int directionChoice;
             switch(direction){
                 case "NORTH":
@@ -77,7 +77,7 @@ public class Game {
                     directionChoice = 1;
                     break;
             }
-           boolean successful = playersBoard.moveShip(ship,directionChoice,isVertical);
+           boolean successful = playersBoard.moveShip(directionChoice,isVertical,shipType);
 
             if (!successful)
             return false;
