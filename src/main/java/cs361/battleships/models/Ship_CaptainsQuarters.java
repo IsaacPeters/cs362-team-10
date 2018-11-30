@@ -80,12 +80,7 @@ public class Ship_CaptainsQuarters extends Ship{
             }
         }
     }
-    //Helper to call the move ship and process the request
-    public boolean setMove()
-    {
-        moveShip();
 
-    }
 
     @JsonIgnore
     public boolean isSunk() {

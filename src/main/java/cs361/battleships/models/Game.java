@@ -60,6 +60,21 @@ public class Game {
 
         return true;
     }
+    //Move ship
+    public boolean moveShip(Ship ship, String direction){
+            switch(direction){
+                case "NORTH":
+                    break;
+                case "SOUTH":
+
+                    break;
+                case "WEST":
+
+                    break;
+                case "EAST":
+            }
+
+    }
 
     private char randCol() {
         int random = new Random().nextInt(10);
