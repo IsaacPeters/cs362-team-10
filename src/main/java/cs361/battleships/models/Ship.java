@@ -38,9 +38,6 @@ public class Ship {
 			case "BATTLESHIP":
 				size = 4;
 				break;
-			case "SUBMARINE":
-				size =4;
-				break;
 		}
 	}
 
