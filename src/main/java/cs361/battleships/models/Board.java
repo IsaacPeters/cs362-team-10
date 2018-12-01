@@ -30,7 +30,7 @@ public class Board {
 	DO NOT change the signature of this method. It is used by the grading scripts.
 	 */
 	public boolean placeShip(Ship ship, int x, char y, boolean isVertical) {
-		if (ships.size() >= 3) {
+		if (ships.size() >= 4) {
 			return false;
 		}
 		if (ships.stream().anyMatch(s -> s.getKind().equals(ship.getKind()))) {
@@ -90,8 +90,10 @@ public class Board {
 		// Check to see if we've sunk a ship. If we have, we should use the space laser instead
 		Result attackResult;
 		if (ships.stream().anyMatch(ship -> ship.isSunk())) {
+			System.out.println("\tUSING SPACE LASER\n");
 			attackResult = hitShip.spaceLaser(s.getRow(), s.getColumn());
 		} else {
+			System.out.println("\tUSING NORMAL ATTACK\n");
 			attackResult = hitShip.attack(s.getRow(), s.getColumn());
 		}
 		if (attackResult.getResult() == AtackStatus.SUNK) {

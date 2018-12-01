@@ -31,6 +31,50 @@ public class Ship_Submarine extends Ship_CaptainsQuarters {
         this.setIsSubmerged(Submerge);
     }
 
+	public Result spaceLaser(int x, char y) {
+		return this.attack(x, y, true);
+	}
+
+	public Result attack(int x, char y) {
+		return this.attack(x, y, false);
+	}
+
+    private Result attack(int x, char y, boolean penetration) {
+
+        System.out.println("\t Attacking in sub\n");
+		// This tests to see if we need penetration to hit this ship.
+		// If we do, and penetration is false, then we should return a miss
+		if (this.getIsSubmerged() && !penetration) {
+            System.out.println("\t\t Returning miss because we're under water\n");
+			return new Result(new Square(x, y));
+		}
+
+		var attackedLocation = new Square(x, y);
+		var square = getOccupiedSquares().stream().filter(s -> s.equals(attackedLocation)).findFirst();
+		if (!square.isPresent()) {
+			return new Result(attackedLocation);
+		}
+		var attackedSquare = square.get();
+
+		if (attackedSquare.isHit()) {
+			var result = new Result(attackedLocation);
+			result.setResult(AtackStatus.INVALID);
+			return result;
+		}
+
+		attackedSquare.hit();
+		var result = new Result(attackedLocation);
+		result.setShip(this);
+		if (isSunk()) {
+			result.setResult(AtackStatus.SUNK);
+		} else if (attackedSquare.getHit() == false) {
+			result.setResult(AtackStatus.MISS);
+		} else {
+			result.setResult(AtackStatus.HIT);
+		}
+		return result;
+	}
+
 
     public void place(char col, int row, boolean isVertical) {
         List<Square> temp = getOccupiedSquares();
