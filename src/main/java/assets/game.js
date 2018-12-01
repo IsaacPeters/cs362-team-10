@@ -259,8 +259,8 @@ function initGame() {
        registerCellListener(place(4));
     });
     document.getElementById("place_submarine").addEventListener("click", function(e) {
-            shipType = "SUBMARINE";
-           registerCellListener(place(4));
+        shipType = "SUBMARINE";
+       registerCellListener(place(4));
         });
     sendXhr("GET", "/game", {}, function(data) {
         game = data;
