@@ -61,8 +61,8 @@ public class Game {
         return true;
     }
     //Move ship in the direction that the user wants
-    public boolean moveShipG(String direction, boolean isVertical, String shipType){
-        int directionChoice;
+    public boolean moveShip(String direction, boolean isVertical, String shipType){
+        int directionChoice = 0;
             switch(direction){
                 case "NORTH":
                     directionChoice = -1;
@@ -81,6 +81,10 @@ public class Game {
 
             if (!successful)
             return false;
+
+            else{
+                return true;
+            }
     }
 
     private char randCol() {
