@@ -7,6 +7,7 @@ var sonarChecked;
 var sonarUnlock = 0;
 var sonarCounter = 0;
 var sonarButton = 0;
+var direction = -1;
 
 function makeGrid(table, isPlayer) {
     for (i=0; i<10; i++) {
@@ -81,6 +82,7 @@ function markHits(board, elementId, surrenderText) {
     });
 }
 
+
 function markPulse(board, elementId) {
     board.sonarResults.forEach((pulse) => {
         let className;
@@ -128,6 +130,7 @@ function registerCellListener(f) {
 function cellClick() {
     let row = this.parentNode.rowIndex + 1;
     let col = String.fromCharCode(this.cellIndex + 65);
+    vertical = document.getElementById("is_vertical").checked;
     sonarChecked = document.getElementById("sonar_pulse").checked;
 
     if (isSetup) {
@@ -157,9 +160,9 @@ function cellClick() {
             {
                 outputTextBox(5);
             }
+
         });
     }
-
     else {
         sendXhr("POST", "/attack", {game: game, x: row, y: col}, function(data) {
             game = data;
@@ -168,6 +171,15 @@ function cellClick() {
 
     }
 }
+
+function onMoveButtonClick(){
+        vertical = document.getElementById("is_vertical").checked;
+        sendXhr("POST", "/moveShip", {game: game, Direction: direction, isVertical: vertical}, function(data) {   //connects to Routes.java which connects to game.sonarPulse
+                game = data;
+                redrawGrid();
+            });
+}
+
 
 function sendXhr(method, url, data, handler) {
     var req = new XMLHttpRequest();

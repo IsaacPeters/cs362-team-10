@@ -98,17 +98,26 @@ public class Ship {
 	}
 
 	public boolean move(int magnitude, boolean isVertical){
-		List<Square> temp;
+		List<Square> temp = new ArrayList<>();
+
 		for (int i = 0; i < occupiedSquares.size(); i++) {
-			temp.add(occupiedSquares.get(i).getRow(), occupiedSquares.get(i).getColumn());
+			temp.add(new Square(occupiedSquares.get(i).getRow(), occupiedSquares.get(i).getColumn()));
 		}
 		for (int i = 0; i < occupiedSquares.size(); i++){
 			if(isVertical) {
 				temp.get(i).setRow(occupiedSquares.get(i).getRow() + magnitude);
+				if(temp.get(i).isOutOfBounds()){
+					return false;
+				}
 			} else{
 				temp.get(i).setColumn( (char) (occupiedSquares.get(i).getColumn() + magnitude));
+				if(temp.get(i).isOutOfBounds()){
+					return false;
+				}
 			}
 		}
+		setOccupiedSquares(temp);
+		return true;
 	}
 
 	@JsonIgnore

@@ -94,15 +94,19 @@ public class Board {
 		}
 		return attackResult;
 	}
-	public boolean moveShip(int direction, boolean isVertical, String ship){
-		Ship shipToMove;
+
+	public boolean moveShip(int direction, boolean isVertical){
+		Ship shipToMove = null;
 		for(int i = 0; i < ships.size(); i++){
-			if (ships.get(i).getKind() == ship){
-				shipToMove = ships.get(i);
+			if (ships.get(i).move(direction, isVertical) == false){
+				return false;
 			}
 		}
-		shipToMove.move(direction,isVertical);
+		if(shipToMove == null){
+			return false;
+		}
 
+		return true;
 
 	}
 

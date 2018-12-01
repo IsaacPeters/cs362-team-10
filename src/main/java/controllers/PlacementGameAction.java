@@ -10,6 +10,7 @@ public class PlacementGameAction {
     @JsonProperty private int x;
     @JsonProperty private char y;
     @JsonProperty private boolean isVertical;
+    @JsonProperty private int Direction = -1;
 
     public Game getGame() {
         return game;
@@ -26,6 +27,8 @@ public class PlacementGameAction {
     public String getShipType() {
         return shipType;
     }
+
+    public int getDirection(){ return Direction; }
 
     public boolean isVertical() {
         return isVertical;

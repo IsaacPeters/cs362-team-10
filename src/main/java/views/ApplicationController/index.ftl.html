@@ -1,5 +1,5 @@
 <#import "../layout/defaultLayout.ftl.html" as layout> 
-<@layout.myLayout "Home page">    
+<@layout.myLayout "Home page">
 
 
 <h1 style="color:white;">SpacePirates!</h1>
@@ -21,7 +21,8 @@
             <li><button1 id="place_minesweeper">Place Minesweeper</button1></li>
             <li><button2 id="place_destroyer">Place Destroyer</button2></li>
             <li><button3 id="place_battleship">Place Battleship</button3></li>
-            <li><button4 >Captain minesweeper</button4></li>
+            <li><button4 onclick="onMoveButtonClick();">MoveButton</button4></li>
+
             <li><button5 >Captain Destroyer</button5></li>
             <li><button6 >Captain Battleship</button6></li>
             <li style="color:white;"><input type="checkbox" id="sonar_pulse">Sonar Pulse</input></li>
