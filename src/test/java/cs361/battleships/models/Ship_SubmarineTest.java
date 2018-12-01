@@ -99,7 +99,7 @@ public class Ship_SubmarineTest {
         boolean result;
         Board gameB = new Board();
 
-        Ship_Submarine Submarine = new Ship_Submarine(false);
+        Ship Submarine = new Ship_Submarine(false);
         result = gameB.placeShip(Submarine, 2, 'A', true);
         assertTrue(result);
 
