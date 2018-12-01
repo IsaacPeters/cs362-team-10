@@ -137,7 +137,7 @@ function cellClick() {
             game = data;
             redrawGrid();
             placedShips++;
-            if (placedShips == 4) {
+            if (placedShips == 3) {
                 outputTextBox(4);
                 isSetup = false;
                 registerCellListener((e) => {});
