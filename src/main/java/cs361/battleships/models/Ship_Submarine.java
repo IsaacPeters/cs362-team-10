@@ -31,6 +31,7 @@ public class Ship_Submarine extends Ship_CaptainsQuarters {
         this.setIsSubmerged(Submerge);
     }
 
+
     public void place(char col, int row, boolean isVertical) {
         List<Square> temp = getOccupiedSquares();
         for (int i=0; i < getSize(); i++) {
