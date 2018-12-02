@@ -90,10 +90,8 @@ public class Board {
 		// Check to see if we've sunk a ship. If we have, we should use the space laser instead
 		Result attackResult;
 		if (ships.stream().anyMatch(ship -> ship.isSunk())) {
-			System.out.println("\tUSING SPACE LASER\n");
 			attackResult = hitShip.spaceLaser(s.getRow(), s.getColumn());
 		} else {
-			System.out.println("\tUSING NORMAL ATTACK\n");
 			attackResult = hitShip.attack(s.getRow(), s.getColumn());
 		}
 		if (attackResult.getResult() == AtackStatus.SUNK) {

@@ -41,11 +41,9 @@ public class Ship_Submarine extends Ship_CaptainsQuarters {
 
     private Result attack(int x, char y, boolean penetration) {
 
-        System.out.println("\t Attacking in sub\n");
 		// This tests to see if we need penetration to hit this ship.
 		// If we do, and penetration is false, then we should return a miss
 		if (this.getIsSubmerged() && !penetration) {
-            System.out.println("\t\t Returning miss because we're under water\n");
 			return new Result(new Square(x, y));
 		}
 
